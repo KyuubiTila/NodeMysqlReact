@@ -4,9 +4,16 @@ const express = require('express');
 const app = express();
 
 const db = require('./models');
+const postRouter = require('./routes/PostRoute');
 
-// // PORT
-// const PORT = process.env.PORT || 8080;
+// MIDDLEWARES
+// ENABLE US PARSE REQUEST FROM THE CLIENT END EXAMPLE THUNDER CLIENT OR POSTMAN AND IN THE CASE OF THE WEB CLIENT SIDE ALSO
+app.use(express.json());
+
+// -------------ROUTERS---------------
+
+// ---------post route---------
+app.use('/api/posts', postRouter);
 
 // GO INTO THE DB AND SYNCHRONIZE IF THE MODELS ALREADY EXIST, IF NOT MAKE THEM EXIST
 db.sequelize.sync().then(() => {
