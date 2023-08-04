@@ -29,16 +29,17 @@ const CreatePost = () => {
   };
 
   return (
-    <>
+    <div className="flex flex-wrap justify-center lg:flex-row">
       <h1>CREATE POST </h1>
-      <div className="flex flex-wrap justify-center lg:flex-row">
+
+      <div className="flex flex-wrap justify-center pt-14 lg:flex-row">
         <CreatePostCard
           addProductHandler={addProductHandler}
           initialValues={initialValues}
           validationSchema={validationSchema}
         />
       </div>
-    </>
+    </div>
   );
 };
 

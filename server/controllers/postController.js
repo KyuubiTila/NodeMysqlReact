@@ -17,7 +17,15 @@ const getAllPosts = async (req, res) => {
   console.log(allPosts);
 };
 
-// 3 DELETE POST
+// 3 GET INDIVIDUAL POST
+const getIndividualPost = async (req, res) => {
+  const id = req.params.id;
+  const singlePost = await Post.findOne({ where: { id: id } });
+  res.status(200).send(singlePost);
+  console.log(singlePost);
+};
+
+// 4 DELETE POST
 const deleteIndividualPost = async (req, res) => {
   const id = req.params.id;
   const deletedPost = await Post.destroy({ where: { id: id } });
@@ -25,7 +33,7 @@ const deleteIndividualPost = async (req, res) => {
   console.log(deletedPost);
 };
 
-// 3 UPDATE POST
+// 5 UPDATE POST
 const updateIndividualPost = async (req, res) => {
   const id = req.params.id;
   await Post.update(req.body, { where: { id: id } });
@@ -38,4 +46,5 @@ module.exports = {
   getAllPosts,
   deleteIndividualPost,
   updateIndividualPost,
+  getIndividualPost,
 };
