@@ -15,5 +15,12 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
+  // POSTS TABLE ASSOCIATION WITH COMMENTS TABLE, hence creating the PostId on the comment table in respect to the post ID
+  Posts.associate = (models) => {
+    Posts.hasMany(models.Comments, {
+      onDelete: 'cascade',
+    });
+  };
+
   return Posts;
 };
