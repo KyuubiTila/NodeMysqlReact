@@ -1,10 +1,16 @@
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CreateCommentCard from '../components/CreateCommentCard';
+import CreateCommentCard from '../components/CreateCommentCard.tsx';
 import * as Yup from 'yup';
 import CommentCard from '../components/CommentCard';
+
+type IComment = {
+  id: number | string;
+  comment: string;
+  updatedAt: Date;
+};
 
 const IndividualPost = () => {
   const navigate = useNavigate();
@@ -12,7 +18,7 @@ const IndividualPost = () => {
   const [title, setTitle] = useState('');
   const [postText, setPostText] = useState('');
   const [username, setUsername] = useState('');
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState<IComment[]>([]);
 
   const initialValues = {
     comment: '',
@@ -63,19 +69,27 @@ const IndividualPost = () => {
     gePostsComments();
   }, [id]);
 
-  const addCommentHandler = async (data) => {
-    await axios.post('http://localhost:3001/api/comments', data);
-    window.location.reload();
+  const addCommentHandler = async (data: IComment) => {
+    const { data: newComment } = await axios.post(
+      'http://localhost:3001/api/comments',
+      data
+    );
+
+    setComments([...comments, newComment]);
   };
 
-  const handleDelete = async (id) => {
+  const handlePostDelete = async (id: number) => {
     await axios.delete(`http://localhost:3001/api/posts/${id}`);
     navigate('/posts');
   };
 
-  const handleCommentDelete = async (id) => {
+  const handleCommentDelete = async (id: number) => {
     await axios.delete(`http://localhost:3001/api/comments/${id}`);
-    window.location.reload();
+    const newComments = comments.filter((element) => {
+      return element.id !== id;
+    });
+
+    setComments(newComments);
   };
 
   return (
@@ -103,7 +117,7 @@ const IndividualPost = () => {
           </button>
         </Link> */}
           <button
-            onClick={() => handleDelete(id)}
+            onClick={() => handlePostDelete(+id!)}
             className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
           >
             <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">

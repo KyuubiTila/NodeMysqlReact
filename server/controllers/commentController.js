@@ -2,12 +2,11 @@ const db = require('../models');
 
 const Comment = db.Comments;
 
-// 1 create product
+// 1 create comment
 const createComment = async (req, res) => {
   const comment = req.body;
-  await Comment.create(comment);
-  res.status(200).send(comment);
-  console.log(comment);
+  const newComment = await Comment.create(comment);
+  res.status(201).send(newComment);
 };
 
 // 2 GET ALL COMMENTS

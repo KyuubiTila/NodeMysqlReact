@@ -1,16 +1,26 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
+type IComment = {
+  id: number | string;
+  comment: string;
+  updatedAt: Date;
+};
+
 const CreateCommentCard = ({
   initialValues,
   validationSchema,
   addCommentHandler,
 }) => {
   return (
-    <Formik
+    <Formik<IComment>
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={addCommentHandler}
+      onSubmit={(data, params) => {
+        addCommentHandler(data);
+
+        params.resetForm();
+      }}
     >
       <Form>
         <hr />
