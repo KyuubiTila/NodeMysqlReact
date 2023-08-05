@@ -1,6 +1,7 @@
 const db = require('../models');
 
 const Post = db.Posts;
+const Comment = db.Comments;
 
 // 1 create product
 const createPost = async (req, res) => {
@@ -41,10 +42,18 @@ const updateIndividualPost = async (req, res) => {
   console.log(req.body);
 };
 
+// 6 GET INDIVIDUAL PRODUCT COMMENTS
+const getIndividualPostComments = async (req, res) => {
+  const id = req.params.id;
+  const allPostsComments = await Comment.findAll({ where: { PostId: id } });
+  res.status(200).send(allPostsComments);
+};
+
 module.exports = {
   createPost,
   getAllPosts,
   deleteIndividualPost,
   updateIndividualPost,
   getIndividualPost,
+  getIndividualPostComments,
 };
