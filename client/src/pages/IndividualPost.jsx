@@ -16,11 +16,10 @@ const IndividualPost = () => {
 
   const initialValues = {
     comment: '',
-    username: '',
+    PostId: id,
   };
   const validationSchema = Yup.object().shape({
     comment: Yup.string().required('you must send a comment'),
-    username: Yup.string().required('you must add your username'),
   });
 
   // USE EFFECT CONNECTING TO DATABASE GETTING THE DATA WHICH WOULD THE BE HELD BY THE USEEFFCT AND THROWN TO THE FRONT END
@@ -64,6 +63,11 @@ const IndividualPost = () => {
     gePostsComments();
   }, [id]);
 
+  const addCommentHandler = async (data) => {
+    await axios.post('http://localhost:3001/api/comments', data);
+    window.location.reload();
+  };
+
   const handleDelete = async (id) => {
     await axios.delete(`http://localhost:3001/api/posts/${id}`);
     navigate('/posts');
@@ -71,7 +75,7 @@ const IndividualPost = () => {
 
   const handleCommentDelete = async (id) => {
     await axios.delete(`http://localhost:3001/api/comments/${id}`);
-    navigate('/individualpost/:id');
+    window.location.reload();
   };
 
   return (
@@ -118,6 +122,7 @@ const IndividualPost = () => {
         })}
 
         <CreateCommentCard
+          addCommentHandler={addCommentHandler}
           initialValues={initialValues}
           validationSchema={validationSchema}
         />

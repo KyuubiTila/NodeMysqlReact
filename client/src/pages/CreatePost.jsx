@@ -19,7 +19,7 @@ const CreatePost = () => {
     username: '',
   };
 
-  const addProductHandler = async (data) => {
+  const addPostHandler = async (data) => {
     console.log(data);
 
     await axios.post('http://localhost:3001/api/posts', data);
@@ -34,7 +34,7 @@ const CreatePost = () => {
 
       <div className="flex flex-wrap justify-center pt-14 lg:flex-row">
         <CreatePostCard
-          addProductHandler={addProductHandler}
+          addPostHandler={addPostHandler}
           initialValues={initialValues}
           validationSchema={validationSchema}
         />

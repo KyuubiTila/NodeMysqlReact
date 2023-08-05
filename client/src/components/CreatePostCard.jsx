@@ -1,14 +1,14 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 const CreatePostCard = ({
-  addProductHandler,
+  addPostHandler,
   initialValues,
   validationSchema,
 }) => {
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={addProductHandler}
+      onSubmit={addPostHandler}
       validationSchema={validationSchema}
     >
       <Form>

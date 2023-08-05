@@ -4,7 +4,7 @@ const CommentCard = ({ eleement, handleCommentDelete }) => {
   const { id, username, comment } = eleement;
   return (
     // <div className="flex flex-wrap justify-center lg:flex-row">
-    <div className="flex flex-wrap  lg:flex-row m-3 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+    <div className="flex flex-wrap justify-between lg:flex-row m-3 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
       <div id="defaultTabContent">
         <h2 className="mb-3 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
           {comment}
