@@ -6,7 +6,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
   });
-
   // Comments.associate = (models) => {
   //   Comments.belongsTo(models.Posts);
   // };

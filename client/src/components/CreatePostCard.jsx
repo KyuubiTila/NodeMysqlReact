@@ -12,6 +12,8 @@ const CreatePostCard = ({
       validationSchema={validationSchema}
     >
       <Form>
+        {' '}
+        .
         <div className="mb-6">
           <label
             htmlFor="email"

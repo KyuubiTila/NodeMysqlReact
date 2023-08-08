@@ -6,7 +6,8 @@ const cors = require('cors');
 const db = require('./models');
 const postRouter = require('./routes/PostRoute');
 const commentRouter = require('./routes/CommentRoute');
-
+const userRouter = require('./routes/UsersRoute');
+const errorHandler = require('./errorhandler/errorhandler');
 // MIDDLEWARES
 // ENABLE US PARSE REQUEST FROM THE CLIENT END EXAMPLE THUNDER CLIENT OR POSTMAN AND IN THE CASE OF THE WEB CLIENT SIDE ALSO
 app.use(express.json());
@@ -25,6 +26,12 @@ app.use('/api/posts', postRouter);
 
 // ---------comment route---------
 app.use('/api/comments', commentRouter);
+
+// ---------users route---------
+app.use('/api/auth', userRouter);
+
+// error handling
+app.use(errorHandler);
 
 // GO INTO THE DB AND SYNCHRONIZE IF THE MODELS ALREADY EXIST, IF NOT MAKE THEM EXIST
 db.sequelize.sync().then(() => {

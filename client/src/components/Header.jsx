@@ -52,6 +52,14 @@ const Header = () => {
                   Register
                 </Link>
               </li>
+              <li>
+                <Link
+                  to={'/login'}
+                  className="text-gray-900 dark:text-white hover:underline"
+                >
+                  Login
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

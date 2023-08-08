@@ -1,9 +1,9 @@
 import React from 'react';
 import * as Yup from 'yup';
-import RegisterCard from '../components/RegisterCard';
 import axios from 'axios';
+import LoginCard from '../components/LoginCard';
 
-const Register = () => {
+const Login = () => {
   const initialValues = {
     username: '',
     password: '',
@@ -14,25 +14,25 @@ const Register = () => {
     password: Yup.string().required('you must input a password'),
   });
 
-  const registerUser = async (data) => {
+  const loginUser = async (data) => {
     try {
       console.log(data);
-      await axios.post('http://localhost:3001/api/auth', data);
-      console.log('users created successfully');
+      await axios.post('http://localhost:3001/api/auth/login', data);
+      console.log('logged In successfully');
     } catch (error) {
-      console.error('Error:', error);
+      console.log('Error:', error.message);
     }
   };
 
   return (
     <div className="flex flex-wrap justify-center pt-14 lg:flex-row">
-      <RegisterCard
+      <LoginCard
         initialValues={initialValues}
         validationSchema={validationSchema}
-        registerUser={registerUser}
+        loginUser={loginUser}
       />
     </div>
   );
 };
 
-export default Register;
+export default Login;
