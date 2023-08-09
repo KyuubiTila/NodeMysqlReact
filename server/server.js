@@ -7,7 +7,7 @@ const db = require('./models');
 const postRouter = require('./routes/PostRoute');
 const commentRouter = require('./routes/CommentRoute');
 const userRouter = require('./routes/UsersRoute');
-const errorHandler = require('./errorhandler/errorhandler');
+const errorHandler = require('./middleware/errorhandler');
 // MIDDLEWARES
 // ENABLE US PARSE REQUEST FROM THE CLIENT END EXAMPLE THUNDER CLIENT OR POSTMAN AND IN THE CASE OF THE WEB CLIENT SIDE ALSO
 app.use(express.json());

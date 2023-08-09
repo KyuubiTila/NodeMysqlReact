@@ -17,8 +17,16 @@ const Login = () => {
   const loginUser = async (data) => {
     try {
       console.log(data);
-      await axios.post('http://localhost:3001/api/auth/login', data);
-      console.log('logged In successfully');
+      const response = await axios.post(
+        'http://localhost:3001/api/auth/login',
+        data
+      );
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
+        sessionStorage.setItem('accessToken', response.data);
+        console.log(response.data);
+      }
     } catch (error) {
       console.log('Error:', error.message);
     }

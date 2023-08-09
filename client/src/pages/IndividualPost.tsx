@@ -72,8 +72,14 @@ const IndividualPost = () => {
   const addCommentHandler = async (data: IComment) => {
     const { data: newComment } = await axios.post(
       'http://localhost:3001/api/comments',
-      data
+      data,
+      {
+        headers: {
+          accessToken: sessionStorage.getItem('accessToken'),
+        },
+      }
     );
+    console.log(data);
 
     setComments([...comments, newComment]);
   };
