@@ -1,7 +1,7 @@
 import React from 'react';
 
 const CommentCard = ({ eleement, handleCommentDelete }) => {
-  const { id, username, comment } = eleement;
+  const { id, comment, username } = eleement;
   return (
     // <div className="flex flex-wrap justify-center lg:flex-row">
     <>

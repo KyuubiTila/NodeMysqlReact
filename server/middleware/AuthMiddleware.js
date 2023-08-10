@@ -9,6 +9,8 @@ const validateToken = (req, res, next) => {
 
   try {
     const validToken = verify(accessToken, 'importantsecrete');
+    // setting the req.user to the data available on the encrypted validtoken
+    req.user = validToken;
     if (validToken) {
       return next();
     }

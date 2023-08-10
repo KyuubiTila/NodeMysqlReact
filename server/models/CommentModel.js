@@ -5,16 +5,20 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   });
   // Comments.associate = (models) => {
   //   Comments.belongsTo(models.Posts);
   // };
 
-  Comments.associate = (models) => {
-    Comments.belongsTo(models.Posts, {
-      foreignKey: 'PostId',
-    });
-  };
+  // Comments.associate = (models) => {
+  //   Comments.belongsTo(models.Posts, {
+  //     foreignKey: 'PostId',
+  //   });
+  // };
 
   return Comments;
 };

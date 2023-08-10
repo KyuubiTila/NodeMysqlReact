@@ -28,6 +28,8 @@ const IndividualPost = () => {
     comment: Yup.string().required('you must send a comment'),
   });
 
+  console.log(id);
+
   // USE EFFECT CONNECTING TO DATABASE GETTING THE DATA WHICH WOULD THE BE HELD BY THE USEEFFCT AND THROWN TO THE FRONT END
   useEffect(() => {
     // ASYNC FUNCTION TO CALLING THE DATABASE
@@ -61,7 +63,6 @@ const IndividualPost = () => {
         const { data } = commentResponse;
         setComments(data);
         console.log(commentResponse);
-        console.log(comments);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -79,7 +80,6 @@ const IndividualPost = () => {
         },
       }
     );
-    console.log(data);
 
     setComments([...comments, newComment]);
   };

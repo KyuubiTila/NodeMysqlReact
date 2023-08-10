@@ -2,8 +2,10 @@ import React from 'react';
 import * as Yup from 'yup';
 import axios from 'axios';
 import LoginCard from '../components/LoginCard';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate();
   const initialValues = {
     username: '',
     password: '',
@@ -26,6 +28,7 @@ const Login = () => {
       } else {
         sessionStorage.setItem('accessToken', response.data);
         console.log(response.data);
+        navigate('/posts');
       }
     } catch (error) {
       console.log('Error:', error.message);

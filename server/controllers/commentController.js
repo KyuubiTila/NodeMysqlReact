@@ -5,6 +5,9 @@ const Comment = db.Comments;
 // 1 create comment
 const createComment = async (req, res) => {
   const comment = req.body;
+  // grabing the username from the token generated from the login which contains the username and id of the loggedin user
+  const username = req.user.username;
+  comment.username = username;
   const newComment = await Comment.create(comment);
   res.status(201).send(newComment);
 };
