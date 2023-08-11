@@ -30,7 +30,7 @@ const CreatePostCard = ({
             required
           />
           <span className="text-red-500">
-            <ErrorMessage name="postText" component="span" />
+            <ErrorMessage name="title" component="span" />
           </span>
         </div>
         <div className="mb-6">
@@ -69,7 +69,7 @@ const CreatePostCard = ({
             required
           />
           <span className="text-red-500">
-            <ErrorMessage name="postText" component="span" />
+            <ErrorMessage name="username" component="span" />
           </span>
         </div>
         <button

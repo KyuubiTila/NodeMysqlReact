@@ -22,10 +22,18 @@ const CreatePost = () => {
   const addPostHandler = async (data) => {
     console.log(data);
 
-    await axios.post('http://localhost:3001/api/posts', data);
+    try {
+      await axios.post('http://localhost:3001/api/posts', data, {
+        headers: {
+          accessToken: localStorage.getItem('accessToken'),
+        },
+      });
 
-    // on execution it should redirect ie navigate to the showProduct page
-    navigate('/posts');
+      // on execution it should redirect ie navigate to the showProduct page
+      navigate('/posts');
+    } catch (error) {
+      alert(error.response.data.error);
+    }
   };
 
   return (

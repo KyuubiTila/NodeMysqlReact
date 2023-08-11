@@ -4,7 +4,7 @@ const validateToken = (req, res, next) => {
   const accessToken = req.header('accessToken');
 
   if (!accessToken) {
-    return res.json('user not loggedIn');
+    return res.status(401).json({ error: 'User not logged in' });
   }
 
   try {
@@ -15,7 +15,7 @@ const validateToken = (req, res, next) => {
       return next();
     }
   } catch (err) {
-    res.json({ error: err });
+    return res.status(500).json({ error: err.message });
   }
 };
 

@@ -2,6 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
+  const logout = () => {
+    localStorage.removeItem('accessToken');
+    window.location.reload();
+  };
+
   return (
     <>
       <nav className=" flex flex-wrap justify-between bg-gray-50 dark:bg-gray-700">
@@ -25,7 +30,7 @@ const Header = () => {
                   Create Post
                 </Link>
               </li>
-              {!localStorage.getItem('accessToken') && (
+              {!localStorage.getItem('accessToken') ? (
                 <>
                   <li>
                     <Link
@@ -44,6 +49,16 @@ const Header = () => {
                     </Link>
                   </li>
                 </>
+              ) : (
+                <li>
+                  <Link
+                    onClick={logout}
+                    to={'/posts'}
+                    className="text-gray-900 dark:text-white hover:underline"
+                  >
+                    Logout
+                  </Link>
+                </li>
               )}
             </ul>
           </div>

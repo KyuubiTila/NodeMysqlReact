@@ -6,14 +6,15 @@ const {
   getIndividualPost,
   getIndividualPostComments,
 } = require('../controllers/postController');
+const { validateToken } = require('../middleware/AuthMiddleware');
 
 const postRouter = require('express').Router();
 
-postRouter.post('/', createPost);
+postRouter.post('/', validateToken, createPost);
 postRouter.get('/allPosts', getAllPosts);
 postRouter.get('/:id', getIndividualPost);
-postRouter.delete('/:id', deleteIndividualPost);
-postRouter.put('/:id', updateIndividualPost);
+postRouter.delete('/:id', validateToken, deleteIndividualPost);
+postRouter.put('/:id', validateToken, updateIndividualPost);
 postRouter.get('/:id/comment', getIndividualPostComments);
 
 module.exports = postRouter;

@@ -71,31 +71,54 @@ const IndividualPost = () => {
   }, [id]);
 
   const addCommentHandler = async (data: IComment) => {
-    const { data: newComment } = await axios.post(
-      'http://localhost:3001/api/comments',
-      data,
-      {
-        headers: {
-          accessToken: localStorage.getItem('accessToken'),
-        },
-      }
-    );
+    try {
+      const { data: newComment } = await axios.post(
+        'http://localhost:3001/api/comments',
+        data, // THIS IS THE DATA CARRIER
+        {
+          // THIS IS THE TOKEN CARRIER FROM WHICH THE AUTH WILL TAKE ITS PARAMETERS FOR CHECK
+          headers: {
+            accessToken: localStorage.getItem('accessToken'),
+          },
+        }
+      );
 
-    setComments([...comments, newComment]);
+      setComments([...comments, newComment]);
+    } catch (error) {
+      alert(`${error.response.data.error}; you can not create comment`);
+    }
   };
 
   const handlePostDelete = async (id: number) => {
-    await axios.delete(`http://localhost:3001/api/posts/${id}`);
-    navigate('/posts');
+    try {
+      await axios.delete(`http://localhost:3001/api/posts/${id}`, {
+        // THIS IS THE TOKEN CARRIER FROM WHICH THE AUTH WILL TAKE ITS PARAMETERS FOR CHECK
+        headers: {
+          accessToken: localStorage.getItem('accessToken'),
+        },
+      });
+      navigate('/posts');
+    } catch (error) {
+      alert(`${error.response.data.error}; you can not delete post`);
+    }
   };
 
   const handleCommentDelete = async (id: number) => {
-    await axios.delete(`http://localhost:3001/api/comments/${id}`);
-    const newComments = comments.filter((element) => {
-      return element.id !== id;
-    });
+    try {
+      await axios.delete(`http://localhost:3001/api/comments/${id}`, {
+        // THIS IS THE TOKEN CARRIER FROM WHICH THE AUTH WILL TAKE ITS PARAMETERS FOR CHECK
+        headers: {
+          accessToken: localStorage.getItem('accessToken'),
+        },
+      });
+      const newComments = comments.filter((element) => {
+        return element.id !== id;
+      });
 
-    setComments(newComments);
+      setComments(newComments);
+    } catch (error) {
+      alert(`${error.response.data.error}; you can not delete comment`);
+    }
   };
 
   return (

@@ -34,8 +34,6 @@ const login = async (req, res, next) => {
         'importantsecrete'
       );
       res.json(accesToken);
-    } else {
-      res.json({ error: 'Invalid login credentials' });
     }
   } catch (error) {
     next(error); // Pass the error to the error handler middleware
