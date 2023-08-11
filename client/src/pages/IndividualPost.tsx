@@ -54,7 +54,7 @@ const IndividualPost = () => {
   }, [id]);
 
   useEffect(() => {
-    // ASYNC FUNCTION TO CALLING THE DATABASE
+    // ASYNC FUNCTION TO CALLING THE DATABASE FOR THE POST DATA
     const gePostsComments = async () => {
       try {
         const commentResponse = await axios.get(
@@ -76,7 +76,7 @@ const IndividualPost = () => {
       data,
       {
         headers: {
-          accessToken: sessionStorage.getItem('accessToken'),
+          accessToken: localStorage.getItem('accessToken'),
         },
       }
     );

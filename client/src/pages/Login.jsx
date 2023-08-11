@@ -26,9 +26,10 @@ const Login = () => {
       if (response.data.error) {
         alert(response.data.error);
       } else {
-        sessionStorage.setItem('accessToken', response.data);
+        localStorage.setItem('accessToken', response.data);
         console.log(response.data);
         navigate('/posts');
+        window.location.reload();
       }
     } catch (error) {
       console.log('Error:', error.message);

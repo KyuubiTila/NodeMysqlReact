@@ -23,7 +23,7 @@ const CommentCard = ({ eleement, handleCommentDelete }) => {
           </button>
         </div>
       ) : (
-        ''
+        alert('you cannot comment, you are not logged in')
       )}
     </>
     // </div>
