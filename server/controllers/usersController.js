@@ -40,7 +40,13 @@ const login = async (req, res, next) => {
   }
 };
 
+// CONFRIM TOKEN TO BE CORRECT
+const actualToken = (req, res) => {
+  // this is the only guy that an throw the req.user from the authMiddleware
+  res.json(req.user);
+};
 module.exports = {
   createUsers,
   login,
+  actualToken,
 };

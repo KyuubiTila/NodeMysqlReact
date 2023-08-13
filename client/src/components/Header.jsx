@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../helpers/AuthContext';
 
 const Header = () => {
+  const { authState } = useContext(AuthContext);
   const logout = () => {
     localStorage.removeItem('accessToken');
     window.location.reload();
@@ -30,7 +32,7 @@ const Header = () => {
                   Create Post
                 </Link>
               </li>
-              {!localStorage.getItem('accessToken') ? (
+              {!authState ? (
                 <>
                   <li>
                     <Link
@@ -50,15 +52,18 @@ const Header = () => {
                   </li>
                 </>
               ) : (
-                <li>
-                  <Link
-                    onClick={logout}
-                    to={'/posts'}
-                    className="text-gray-900 dark:text-white hover:underline"
-                  >
-                    Logout
-                  </Link>
-                </li>
+                <>
+                  <li>
+                    <Link
+                      onClick={logout}
+                      to={'/posts'}
+                      className="text-gray-900 dark:text-white hover:underline"
+                    >
+                      Logout
+                    </Link>
+                  </li>
+                  <li>username</li>
+                </>
               )}
             </ul>
           </div>

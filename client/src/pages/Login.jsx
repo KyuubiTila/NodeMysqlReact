@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import * as Yup from 'yup';
 import axios from 'axios';
 import LoginCard from '../components/LoginCard';
 import { useNavigate } from 'react-router-dom';
-
+import { AuthContext } from '../helpers/AuthContext';
 const Login = () => {
+  const { setAuthState } = useContext(AuthContext);
   const navigate = useNavigate();
   const initialValues = {
     username: '',
@@ -29,7 +30,8 @@ const Login = () => {
         localStorage.setItem('accessToken', response.data);
         console.log(response.data);
         navigate('/posts');
-        window.location.reload();
+        setAuthState(true);
+        // window.location.reload();
       }
     } catch (error) {
       console.log('Error:', error.message);
