@@ -3,10 +3,14 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../helpers/AuthContext';
 
 const Header = () => {
-  const { authState } = useContext(AuthContext);
+  const { authState, setAuthState } = useContext(AuthContext);
   const logout = () => {
     localStorage.removeItem('accessToken');
-    window.location.reload();
+    setAuthState({
+      username: '',
+      id: 0,
+      status: false,
+    });
   };
 
   return (
@@ -32,7 +36,7 @@ const Header = () => {
                   Create Post
                 </Link>
               </li>
-              {!authState ? (
+              {!authState.status ? (
                 <>
                   <li>
                     <Link
@@ -62,7 +66,7 @@ const Header = () => {
                       Logout
                     </Link>
                   </li>
-                  <li>username</li>
+                  <li>Welcome: {authState.username}</li>
                 </>
               )}
             </ul>

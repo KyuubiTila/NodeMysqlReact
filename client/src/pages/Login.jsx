@@ -27,11 +27,14 @@ const Login = () => {
       if (response.data.error) {
         alert(response.data.error);
       } else {
-        localStorage.setItem('accessToken', response.data);
+        localStorage.setItem('accessToken', response.data.token);
         console.log(response.data);
+        setAuthState({
+          username: response.data.username,
+          id: response.data.id,
+          status: true,
+        });
         navigate('/posts');
-        setAuthState(true);
-        // window.location.reload();
       }
     } catch (error) {
       console.log('Error:', error.message);

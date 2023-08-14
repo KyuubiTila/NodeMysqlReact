@@ -9,6 +9,7 @@ const validateToken = (req, res, next) => {
 
   try {
     const validToken = verify(accessToken, 'importantsecrete');
+    // the constituent of validtoken would be the payload datas
     // setting the req.user to the data available on the encrypted validtoken
     req.user = validToken;
     if (validToken) {

@@ -9,7 +9,11 @@ import axios from 'axios';
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 
 const Root = () => {
-  const [authState, setAuthState] = useState<boolean>(false);
+  const [authState, setAuthState] = useState<{}>({
+    username: '',
+    id: 0,
+    status: false,
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,9 +29,13 @@ const Root = () => {
         );
 
         if (response.data.error) {
-          setAuthState(false);
+          setAuthState({ ...authState, status: false });
         } else {
-          setAuthState(true);
+          setAuthState({
+            username: response.data.username,
+            id: response.data.id,
+            status: true,
+          });
         }
       } catch (error) {
         console.error('An error occurred:', error);
