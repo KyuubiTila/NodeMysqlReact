@@ -2,6 +2,7 @@ const db = require('../models');
 
 const Post = db.Posts;
 const Comment = db.Comments;
+const Likes = db.Likes;
 
 // 1 create product
 const createPost = async (req, res) => {
@@ -13,7 +14,7 @@ const createPost = async (req, res) => {
 
 // 2 GET ALL POST
 const getAllPosts = async (req, res) => {
-  const allPosts = await Post.findAll({});
+  const allPosts = await Post.findAll({ include: [Likes] });
   res.status(200).send(allPosts);
   console.log(allPosts);
 };

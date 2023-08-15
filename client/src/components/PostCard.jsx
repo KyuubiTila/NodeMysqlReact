@@ -1,10 +1,16 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 export const PostCard = ({ post, postLike }) => {
   const { id, title, postText, username } = post;
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(
+    localStorage.getItem(`liked_${id}`) === 'true' || false
+  ); // Initialize liked status from localStorage
+
+  useEffect(() => {
+    localStorage.setItem(`liked_${id}`, liked); // Save liked status to localStorage
+  }, [liked, id]);
   //   console.log(image);
   return (
     <div className="m-3 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
