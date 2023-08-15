@@ -24,12 +24,26 @@ const Posts = () => {
     };
     getProductsData();
   }, []);
+
+  const postLike = async (postId) => {
+    const response = await axios.post(
+      'http://localhost:3001/api/like',
+      { PostId: postId },
+      {
+        headers: {
+          accessToken: localStorage.getItem('accessToken'),
+        },
+      }
+    );
+    alert(response.data);
+  };
+
   return (
     <div className="flex flex-wrap justify-center lg:flex-row">
       <nav>SHOW POSTS</nav>
       <div className="flex flex-wrap justify-center lg:flex-row">
         {posts.map((post) => (
-          <PostCard key={post.id} post={post} />
+          <PostCard key={post.id} post={post} postLike={postLike} />
         ))}
       </div>
     </div>

@@ -1,8 +1,10 @@
 import React from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export const PostCard = ({ post }) => {
+export const PostCard = ({ post, postLike }) => {
   const { id, title, postText, username } = post;
+  const [liked, setLiked] = useState(false);
   //   console.log(image);
   return (
     <div className="m-3 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
@@ -27,6 +29,19 @@ export const PostCard = ({ post }) => {
             </span>
           </button>
         </Link>
+        <button
+          className={`${
+            liked
+              ? 'bg-red-500 hover:bg-red-600'
+              : 'bg-blue-500 hover:bg-blue-600'
+          } text-white font-bold py-2 px-4 rounded`}
+          onClick={() => {
+            postLike(id);
+            setLiked(!liked); // Toggle liked status
+          }}
+        >
+          {liked ? 'Unlike' : 'Like'}
+        </button>
       </div>
     </div>
   );
